@@ -1,0 +1,21 @@
+********************* Register User
+POST /api/v1/auth/add HTTP/1.1
+Host: 13.59.15.127
+Content-Type: application/json
+Content-Length: 83
+
+{
+    "name": "John",
+    "email":"john@gmail.com",
+    "password":"11223344"
+}
+*****************Login 
+POST /api/v1/auth/login HTTP/1.1
+Host: 13.59.15.127
+Content-Type: application/json
+Content-Length: 64
+
+{
+    "email": "john@gmail.com",
+    "password": "11223344"
+}
