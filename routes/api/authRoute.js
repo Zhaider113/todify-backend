@@ -9,10 +9,6 @@ const api_url = '/api/v1/auth'
 router.post(`${api_url}/add`, AuthController.Register_User);
 // login user route
 router.post(`${api_url}/login`, AuthController.Login_User);
-// Forget Password
-router.post(`${api_url}/forget-password`, AuthController.forgetPassword);
-// Verify OTP
-router.post(`${api_url}/verify-otp`, AuthController.verifyOTP);
 
 
 module.exports = router

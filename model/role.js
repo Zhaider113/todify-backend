@@ -1,29 +1,38 @@
-const sequelize = require('../config/dbconfig');
-const Sequelize = require('sequelize');
-const { DataTypes } = Sequelize;
-const role = sequelize.define('roles', {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
-    title: {
-        type: DataTypes.STRING(255),
-        allowNull: false
-    },
-    permission: {
-        type: DataTypes.ENUM("read", "write", "admin"),
-        defaultValue: "read"
-    },
-    status: {
-        type: DataTypes.TINYINT,
-        defaultValue: 1
-    },
-    isDeleted: {
-        type: DataTypes.TINYINT,
-        defaultValue: 0
-    }
-}, { freezeTableName: true });
+const mongoose = require('mongoose');
 
-module.exports = role;
+const roleSchema = new mongoose.Schema({
+  id: { // Assuming you want to keep the ID as a Number
+    type: Number,
+    autoIncrement: true,  // Use an auto-incrementing plugin if needed
+    primaryKey: true,
+    allowNull: false
+  },
+  title: {
+    type: String,
+    required: true,
+    maxlength: 255 // Set a maximum length for security
+  },
+  permission: {
+    type: String,
+    enum: ['read', 'write', 'admin'],
+    default: 'read'
+  },
+  status: {
+    type: Number,
+    default: 1
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+module.exports = mongoose.model('Role', roleSchema);

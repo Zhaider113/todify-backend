@@ -1,29 +1,10 @@
-const Sequelize = require('sequelize')
-const dotenv = require('dotenv').config()
+const mongoose = require('mongoose')
 
-const connection = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
-    host: process.env.DB_HOST,
-    dialect: 'mysql',
-    logging: false
-});
+mongoose.connect("mongodb://127.0.0.1:27017/todify_db",{
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    // useFindAndModify:false,
+    // useCreateIndex:true
+}).then(()=> console.log('database is connected'))
+.catch((error)=> console.log('unable to connect', error))
 
-
-
-connection.authenticate()
-    .then(() => {
-        console.log('Database connected...')
-    }).catch((err) => {
-        console.log('Error...', err)
-        // res.redirect("/error");
-    })
-connection.sync({
-
-})
-    .then(() => {
-        console.log(`Tables are Ready`)
-    }).catch((error) => {
-        console.log(error.message)
-    })
-
-connection.sequelize = connection;
-module.exports = connection
